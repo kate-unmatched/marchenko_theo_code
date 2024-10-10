@@ -15,10 +15,18 @@ public class MatrixREF {
 //                {0, 0, 0, 0, 0, 1}
 //        };
 
+//        int[][] originMatrix = {
+//                {1, 2, 3},
+//                {4, 5, 6},
+//                {7, 8, 9}
+//        };
+
         int[][] originMatrix = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
+                {1, 0, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 1},
+                {0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 1, 1},
+                {0, 0, 0, 0, 0, 1}
         };
 
 
@@ -100,19 +108,16 @@ public class MatrixREF {
                 }
             }
 
-            // Меняем строки
             int[] temp = matrix[i];
             matrix[i] = matrix[r];
             matrix[r] = temp;
 
-            // Нормализуем ведущий элемент
             if (matrix[r][lead] != 0) {
                 for (int j = 0; j < cols; j++) {
                     matrix[r][j] /= matrix[r][lead];
                 }
             }
 
-            // Зануляем элементы ниже текущей строки
             for (i = 0; i < rows; i++) {
                 if (i != r && matrix[i][lead] != 0) {
                     int factor = matrix[i][lead];
@@ -125,7 +130,6 @@ public class MatrixREF {
             lead++;
         }
 
-        // Дополнительный шаг: зануляем элементы над ведущими
         for (int r = rows - 1; r >= 0; r--) {
             for (int leadCol = 0; leadCol < cols; leadCol++) {
                 if (matrix[r][leadCol] == 1) {
